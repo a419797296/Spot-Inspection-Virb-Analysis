@@ -22,7 +22,7 @@ function varargout = virb_analysis(varargin)
 
 % Edit the above text to modify the response to help virb_analysis
 
-% Last Modified by GUIDE v2.5 18-Apr-2017 14:52:36
+% Last Modified by GUIDE v2.5 20-Apr-2017 14:32:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,6 +54,9 @@ function virb_analysis_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for virb_analysis
 handles.output = hObject;
+if ~exist('Data','dir') 
+    mkdir('Data')         % 若不存在，在当前目录中产生一个子目录‘Figure’
+end 
 set(handles.off_line,'value',1)
     set(handles.ch1_norm,'string','0')
     set(handles.ch2_norm,'string','0')
@@ -65,13 +68,15 @@ set(handles.off_line,'value',1)
     filenames=dircell(3:end,1) ;  % 第一列是文件名
     set(handles.file_list,'string',filenames);%将辊号名称写入对应辊号listbox中，并将该辊号的路径存到listbox的‘userdata’属性中
     set(handles.file_list,'value',1);%默认选中辊号文件中的第一个
-    filename=filenames{1};
-    filepath=fullfile('./measureData',filename);
-    data=load(filepath);
-    a_data=data(:,2)';
-    Fs=500;
-    color='b';
-    virb_disp(hObject, eventdata, handles,a_data,Fs,color);
+    if ~isempty(filenames)
+        filename=filenames{1};
+        filepath=fullfile('./measureData',filename);
+        data=load(filepath);
+        a_data=data(:,2)';
+        Fs=500;
+        color='b';
+        virb_disp(hObject, eventdata, handles,a_data,Fs,color);
+    end
 
 
 %------------------------初始化坐标轴
@@ -170,7 +175,11 @@ function start_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
+value=get(handles.off_line,'value')
+if value==1
+    msgbox('Only can use this button in online mode')
+    return
+end
 % 构造客户端tcpip对象
 global tcpipClient
 
@@ -183,7 +192,9 @@ Fs = str2double(freq);            % Sampling frequency
 time=get(handles.time,'string');
 channel=get(handles.channel,'string');
 Length=Fs *str2double(time);
-
+now=fix(clock);
+filename=sprintf('SP_%02d%02d%02d.txt',now(4),now(5),now(6));
+set(handles.filename,'string',filename)
 set(handles.start,'UserData',1);
 guidata(hObject, handles);
 % 发送指令
@@ -237,7 +248,11 @@ if value==0
 
     %打开连接对象
     fopen(tcpipClient);
-    
+    if strcmp(tcpipClient.Status,'open')
+        msgbox('have connect to the control box')
+    else
+        msgbox('have not connect to the control box')
+    end
     dec2int = @(x, bits) mod(x + 2^(bits-1), 2^bits) - 2^(bits-1);
     color='rgbk';
     h_line=zeros(4,4);
@@ -247,12 +262,12 @@ if value==0
     recv_num=zeros(1,4);
 
     % x=zeros(4,2048);
-%     while(get(handles.off_line,'value')==0)
-%     %    等待接收数据
-%         while(strcmp(tcpipClient.Status,'open'))
-    while(1)
+    while(get(handles.off_line,'value')==0)
     %    等待接收数据
-        while(1)
+        while(strcmp(tcpipClient.Status,'open'))
+%     while(1)
+%     %    等待接收数据
+%         while(1)
             nBytes = get(tcpipClient,'BytesAvailable');
             if nBytes > 0
                 break;
@@ -283,13 +298,20 @@ if value==0
                 channel_list=result.channelList;
                 num=result.channel_info.num;
                 data=result.channel_info.data;
+                cur_pkg=result.channel_info.cur_package;
+                total_pkg=result.channel_info.total_package;
                 hex=str2hex(data);
                 data_length=size(hex,2)/2;
                 ad_value=zeros(1,data_length);
+
+                filename=get(handles.filename,'string');
+                fid=fopen(fullfile('Data',filename),'at');
                 for j=1:data_length
                     ad_value(j)=hex(2*j-1)*256+hex(2*j);
                     ad_value(j)=dec2int(ad_value(j),16);
+                    fprintf(fid,'%s\n',num2str(ad_value(j)));
                 end
+                fclose(fid);
                 if recv_num(num+1)==0
                     x(num+1,1:data_length)=ad_value;   
                 else
@@ -316,6 +338,7 @@ if value==0
                 freq=get(handles.freq,'string');
                 Fs = str2double(freq);            % Sampling frequency
                 h_line(num+1,:)=virb_disp(hObject, eventdata, handles,a_data,Fs,color(num+1));
+% plot(a_data)
                 pause(0.001);
 %                 plot(a_data)
 
@@ -363,6 +386,29 @@ function channel_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function channel_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to channel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function filename_Callback(hObject, eventdata, handles)
+% hObject    handle to filename (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of filename as text
+%        str2double(get(hObject,'String')) returns contents of filename as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function filename_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to filename (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

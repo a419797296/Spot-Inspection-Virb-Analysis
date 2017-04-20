@@ -1,0 +1,95 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="877827679" file="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Spot Inspection.prj" location="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb" name="Spot Inspection" target="target.mlapps" target-name="Package App">
+    <param.appname>Spot Inspection</param.appname>
+    <param.authnamewatermark>Blue</param.authnamewatermark>
+    <param.email>geweidong525@sina.com</param.email>
+    <param.company>Willtch</param.company>
+    <param.icon />
+    <param.icons />
+    <param.summary />
+    <param.description>capture and display the virb data</param.description>
+    <param.screenshot />
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb</param.output>
+    <param.guid>bfc0e2e4-aa14-40df-9050-6ee47a70c793</param.guid>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.summary />
+      <param.screenshot />
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\virb_analysis.m</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\jsonopt.m</file>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\loadjson.m</file>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\mergestruct.m</file>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\struct2jdata.m</file>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\varargin2struct.m</file>
+      <file>${PROJECT_ROOT}\str2hex.m</file>
+      <file>${PROJECT_ROOT}\virb_analysis.fig</file>
+      <file>${PROJECT_ROOT}\virb_disp.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab" name="Virb" optional="false">H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>E:\Program Files\MATLAB\R2015b</root>
+      <toolboxes>
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

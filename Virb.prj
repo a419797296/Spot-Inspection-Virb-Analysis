@@ -1,0 +1,131 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="1118380749" file="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb.prj" location="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb" name="Virb" preferred-package-location="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>Virb</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark>Blue</param.authnamewatermark>
+    <param.email>geweidong525@sina.com</param.email>
+    <param.company>Willtech</param.company>
+    <param.summary />
+    <param.description>acquicistion and disp the data of virb sens</param.description>
+    <param.screenshot>H:\WILLTECH\Company Materials\透明LOGO.PNG</param.screenshot>
+    <param.guid />
+    <param.installpath.string>RollMeter</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\Virb\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\Virb\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\Virb\for_redistribution</param.output>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.embed.ctf>true</param.embed.ctf>
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.required.mcr.products>
+      <item>35000</item>
+      <item>35010</item>
+      <item>35001</item>
+    </param.required.mcr.products>
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.summary />
+      <param.guid />
+      <param.installpath.combo />
+      <param.logo />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.embed.ctf />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\virb_analysis.m</file>
+    </fileset.main>
+    <fileset.resources />
+    <fileset.package />
+    <fileset.depfun>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\jsonopt.m</file>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\loadjson.m</file>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\mergestruct.m</file>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\struct2jdata.m</file>
+      <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\varargin2struct.m</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\Virb\for_testing" name="readme.txt" optional="true">H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\Virb\for_testing" name="splash.png" optional="false">H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\Virb\for_testing" name="Virb.exe" optional="false">H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb\for_testing\Virb.exe</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>E:\Program Files\MATLAB\R2015b</root>
+      <toolboxes>
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
