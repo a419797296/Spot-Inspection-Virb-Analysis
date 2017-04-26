@@ -9,12 +9,12 @@ Inspection_Matlab\Virb" to Compiler path instance.]
 Parsing file "H:\WILLTECH\Company Project\µ„ºÏ“«\Program\Spot Inspection_Matlab\Virb\virb_analysis.m"
 	(Referenced from: "Compiler Command Line").
 Deleting 6 temporary MEX authorization files.
-Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_0433424145_17204.auth'.
-Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_043349008_17204.auth'.
-Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_043342717_17204.auth'.
-Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_043347720_17204.auth'.
-Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_04334579_17204.auth'.
-Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_0433417709_17204.auth'.
+Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_02eac3901_11948.auth'.
+Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_02eac7764_11948.auth'.
+Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_02eac7937_11948.auth'.
+Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_02eac16656_11948.auth'.
+Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_02eac9420_11948.auth'.
+Removing: 'C:\Users\Blue\AppData\Local\Temp\mathworks_tmp_02eac14670_11948.auth'.
 Generating file "H:\WILLTECH\Company Project\µ„ºÏ“«\Program\Spot Inspection_Matlab\Virb\Virb\for_testing\readme.txt".
 Packaging...
 Adding custom icon E:\Program Files\MATLAB\R2015b\toolbox\compiler\Resources\default_icon.ico to H:\WILLTECH\Company Project\µ„ºÏ“«\Program\Spot Inspection_Matlab\Virb\Virb\for_testing\Virb.exe.
@@ -23,4 +23,4 @@ Finished embedding CTF archive. Deleting the external CTF archive.
 Creating the bundle...
 Web based installer created at H:\WILLTECH\Company Project\µ„ºÏ“«\Program\Spot Inspection_Matlab\Virb\Virb\for_redistribution\MyAppInstaller_web.exe.
 Packaging complete.
-Elapsed packaging time was: 56 seconds.
+Elapsed packaging time was: 1 minutes and 27 seconds.

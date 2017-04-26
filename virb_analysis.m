@@ -22,7 +22,7 @@ function varargout = virb_analysis(varargin)
 
 % Edit the above text to modify the response to help virb_analysis
 
-% Last Modified by GUIDE v2.5 20-Apr-2017 14:32:12
+% Last Modified by GUIDE v2.5 24-Apr-2017 09:44:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -78,6 +78,22 @@ set(handles.off_line,'value',1)
         virb_disp(hObject, eventdata, handles,a_data,Fs,color);
     end
 
+    dir_info=dir('./Data');   % 用你需要的目录以及文件扩展名替换。读取某个目录的指定类型文件列表，返回结构数组。
+    % dirs=dir(fulpath);   % 用你需要的目录以及文件扩展名替换。读取某个目录的指定类型文件列表，返回结构数组。
+    dircell=struct2cell(dir_info)' ;    % 结构体(struct)转换成元胞类型(cell)，转置一下是让文件名按列排列。
+    % dircell=struct2cell(dirs)' ;    % 结构体(struct)转换成元胞类型(cell)，转置一下是让文件名按列排列。
+    filenames=dircell(3:end,1) ;  % 第一列是文件名
+    set(handles.file_list_txt,'string',filenames);%将辊号名称写入对应辊号listbox中，并将该辊号的路径存到listbox的‘userdata’属性中
+    set(handles.file_list_txt,'value',1);%默认选中辊号文件中的第一个
+%     if ~isempty(filenames)
+%         filename=filenames{1};
+%         filepath=fullfile('./measureData',filename);
+%         data=load(filepath);
+%         a_data=data(:,2)';
+%         Fs=500;
+%         color='b';
+%         virb_disp(hObject, eventdata, handles,a_data,Fs,color);
+%     end
 
 %------------------------初始化坐标轴
 axes(handles.a_t)
@@ -189,11 +205,12 @@ global tcpipClient
     delete(findobj(handles.v_f,'type','Line'))
 freq=get(handles.freq,'string');
 Fs = str2double(freq);            % Sampling frequency
+set(handles.upfreq,'string',num2str(Fs/2-1))
 time=get(handles.time,'string');
 channel=get(handles.channel,'string');
 Length=Fs *str2double(time);
 now=fix(clock);
-filename=sprintf('SP_%02d%02d%02d.txt',now(4),now(5),now(6));
+filename=sprintf('%d_%02d%02d%02d.txt',Fs,now(4),now(5),now(6));
 set(handles.filename,'string',filename)
 set(handles.start,'UserData',1);
 guidata(hObject, handles);
@@ -256,7 +273,7 @@ if value==0
     dec2int = @(x, bits) mod(x + 2^(bits-1), 2^bits) - 2^(bits-1);
     color='rgbk';
     h_line=zeros(4,4);
-    L = 2048;             % Length of signal
+    L = 4096;             % Length of signal
     cmd=[];
     x=zeros(4,L);
     recv_num=zeros(1,4);
@@ -337,10 +354,8 @@ if value==0
                 a_data=x(num+1,1:recv_num(num+1));
                 freq=get(handles.freq,'string');
                 Fs = str2double(freq);            % Sampling frequency
-                h_line(num+1,:)=virb_disp(hObject, eventdata, handles,a_data,Fs,color(num+1));
-% plot(a_data)
+                 h_line(num+1,:)=virb_disp(hObject, eventdata, handles,a_data,Fs,color(num+1));
                 pause(0.001);
-%                 plot(a_data)
 
             end     
             idx=find(cmd==0);
@@ -362,14 +377,41 @@ else
         fclose(tcpipClient);     
     end
 
-    filenames=get(handles.file_list,'string');  %将辊号名称写入对应辊号listbox中，并将该辊号的路径存到listbox的‘userdata’属性中
-    filename=filenames{1};
-    filepath=fullfile('./measureData',filename);
-    data=load(filepath);
-    a_data=data(:,2)';
-    Fs=500;
-    color='b';
-    virb_disp(hObject, eventdata, handles,a_data,Fs,color);
+%     filenames=get(handles.file_list,'string');  %将辊号名称写入对应辊号listbox中，并将该辊号的路径存到listbox的‘userdata’属性中
+%     filename=filenames{1};
+%     filepath=fullfile('./measureData',filename);
+%     data=load(filepath);
+%     a_data=data(:,2)';
+%     Fs=500;
+%     color='b';
+%     virb_disp(hObject, eventdata, handles,a_data,Fs,color);
+%     
+    dir_info=dir('./measureData');   % 用你需要的目录以及文件扩展名替换。读取某个目录的指定类型文件列表，返回结构数组。
+    % dirs=dir(fulpath);   % 用你需要的目录以及文件扩展名替换。读取某个目录的指定类型文件列表，返回结构数组。
+    dircell=struct2cell(dir_info)' ;    % 结构体(struct)转换成元胞类型(cell)，转置一下是让文件名按列排列。
+    % dircell=struct2cell(dirs)' ;    % 结构体(struct)转换成元胞类型(cell)，转置一下是让文件名按列排列。
+    filenames=dircell(3:end,1) ;  % 第一列是文件名
+    set(handles.file_list,'string',filenames);%将辊号名称写入对应辊号listbox中，并将该辊号的路径存到listbox的‘userdata’属性中
+    set(handles.file_list,'value',1);%默认选中辊号文件中的第一个
+    if ~isempty(filenames)
+        filename=filenames{1};
+        filepath=fullfile('./measureData',filename);
+        data=load(filepath);
+        a_data=data(:,2)';
+        Fs=500;
+        color='b';
+        virb_disp(hObject, eventdata, handles,a_data,Fs,color);
+    end
+
+    dir_info=dir('./Data');   % 用你需要的目录以及文件扩展名替换。读取某个目录的指定类型文件列表，返回结构数组。
+    % dirs=dir(fulpath);   % 用你需要的目录以及文件扩展名替换。读取某个目录的指定类型文件列表，返回结构数组。
+    dircell=struct2cell(dir_info)' ;    % 结构体(struct)转换成元胞类型(cell)，转置一下是让文件名按列排列。
+    % dircell=struct2cell(dirs)' ;    % 结构体(struct)转换成元胞类型(cell)，转置一下是让文件名按列排列。
+    filenames=dircell(3:end,1) ;  % 第一列是文件名
+    set(handles.file_list_txt,'string',filenames);%将辊号名称写入对应辊号listbox中，并将该辊号的路径存到listbox的‘userdata’属性中
+    set(handles.file_list_txt,'value',1);%默认选中辊号文件中的第一个
+    
+    
 end
 
 
@@ -409,6 +451,95 @@ function filename_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function filename_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to filename (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in file_list_txt.
+function file_list_txt_Callback(hObject, eventdata, handles)
+% hObject    handle to file_list_txt (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns file_list_txt contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from file_list_txt
+  delete(findobj(handles.a_t,'type','Line'))
+    delete(findobj(handles.a_f,'type','Line'))
+    delete(findobj(handles.v_t,'type','Line'))
+    delete(findobj(handles.v_f,'type','Line'))
+    
+value=get(handles.off_line,'value')
+if value==1
+    filenames=get(handles.file_list_txt,'string');  %将辊号名称写入对应辊号listbox中，并将该辊号的路径存到listbox的‘userdata’属性中
+    value=get(handles.file_list_txt,'value');   %默认选中辊号文件中的第一个
+    filename=filenames{value};
+    filepath=fullfile('./Data',filename);
+    data=load(filepath);
+    a_data=data(:,1)';
+    idx=strfind(filename,'_');
+    Fs=str2double(filename(1:idx-1));
+    color='b';
+    virb_disp(hObject, eventdata, handles,a_data,Fs,color);
+end
+
+
+
+
+% --- Executes during object creation, after setting all properties.
+function file_list_txt_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to file_list_txt (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function upfreq_Callback(hObject, eventdata, handles)
+% hObject    handle to upfreq (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of upfreq as text
+%        str2double(get(hObject,'String')) returns contents of upfreq as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function upfreq_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to upfreq (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function lowfreq_Callback(hObject, eventdata, handles)
+% hObject    handle to lowfreq (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of lowfreq as text
+%        str2double(get(hObject,'String')) returns contents of lowfreq as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function lowfreq_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lowfreq (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

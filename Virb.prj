@@ -1,9 +1,9 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1118380749" file="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb.prj" location="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb" name="Virb" preferred-package-location="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="2094725367" file="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb.prj" location="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb" name="Virb" preferred-package-location="H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>Virb</param.appname>
     <param.icon />
     <param.icons />
-    <param.version>1.0</param.version>
+    <param.version>1.1</param.version>
     <param.authnamewatermark>Blue</param.authnamewatermark>
     <param.email>geweidong525@sina.com</param.email>
     <param.company>Willtech</param.company>
@@ -41,7 +41,6 @@
     <unset>
       <param.icon />
       <param.icons />
-      <param.version />
       <param.summary />
       <param.guid />
       <param.installpath.combo />
@@ -76,6 +75,9 @@
       <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\mergestruct.m</file>
       <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\struct2jdata.m</file>
       <file>C:\Users\Blue\Documents\MATLAB\Add-Ons\Toolboxes\JSONlab_ a toolbox to encode_decode JSON files\code\jsonlab-1.5\varargin2struct.m</file>
+      <file>${PROJECT_ROOT}\str2hex.m</file>
+      <file>${PROJECT_ROOT}\virb_analysis.fig</file>
+      <file>${PROJECT_ROOT}\virb_disp.m</file>
     </fileset.depfun>
     <build-deliverables>
       <file location="${PROJECT_ROOT}\Virb\for_testing" name="readme.txt" optional="true">H:\WILLTECH\Company Project\点检仪\Program\Spot Inspection_Matlab\Virb\Virb\for_testing\readme.txt</file>

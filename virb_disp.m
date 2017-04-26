@@ -1,15 +1,24 @@
 function [h_line]=virb_disp(hObject, eventdata, handles,a_data,Fs,color)
-a=a_data;
+a=a_data+50;
 h_line=zeros(1,4);
 % a=a-mean(a)
 % Fs = 500;            % Sampling frequency
 T = 1/Fs;             % Sampling period
 L = size(a,2);           % Length of signal
+% L = Fs;           % Length of signal
 t = (0:L-1)*T;        % Time vector
 nfft=2^nextpow2(L);
 df=Fs/nfft;
-fmin=2;
-fmax=Fs/2-df;
+fmin=str2double(get(handles.lowfreq,'string'));
+fmax=str2double(get(handles.upfreq,'string'));
+if fmin<0
+    fmin=0;
+    set(handles.lowfreq,'string',num2str(fmin));
+end
+if fmax>Fs/2-df
+    fmax=Fs/2-1;
+    set(handles.upfreq,'string',num2str(fmax));
+end
 
 
 %----------------------------
